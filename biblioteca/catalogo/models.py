@@ -7,7 +7,7 @@ class Libro(models.Model):
     autor = models.CharField(max_length=255)
     descripcion = models.TextField()
     stock = models.PositiveIntegerField()
-    imagen = models.URLField(blank=True)  # <-- ahora acepta URLs externas
+    imagen = models.URLField(blank=True)
 
     def __str__(self):
         return self.titulo

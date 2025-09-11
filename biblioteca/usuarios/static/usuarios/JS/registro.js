@@ -4,12 +4,11 @@ document.getElementById("registroForm").addEventListener("submit", function(e) {
     const password2 = document.getElementById("id_password2").value;
 
     if (password1 !== password2) {
-        e.preventDefault(); // Evita enviar el formulario
+        e.preventDefault(); 
         alert("Las contraseñas no coinciden.");
         return;
     }
 
-    // Puedes agregar más validaciones si quieres, por ejemplo:
     const nombre = document.getElementById("id_nombre_completo").value;
     if (nombre.length < 3) {
         e.preventDefault();

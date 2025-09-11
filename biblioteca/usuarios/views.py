@@ -21,7 +21,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect("catalogo:home")  # <- namespace agregado
+            return redirect("catalogo:home")
     else:
         form = LoginForm()
     return render(request, "usuarios/login.html", {"form": form})
