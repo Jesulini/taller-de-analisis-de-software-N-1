@@ -64,17 +64,20 @@ header input {
   color: red;
 }
 
-.btn, .libro a {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 8px 12px;
-  background: #0066cc;
+.ver-mas {
+  background: #007BFF;   /* azul principal */
   color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background 0.2s;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  font-size: 14px;
 }
 
-.btn:hover, .libro a:hover {
-  background: #004999;
+.ver-mas:hover {
+  background: #0056b3;   /* azul más oscuro al pasar el mouse */
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(0, 91, 187, 0.4);
 }

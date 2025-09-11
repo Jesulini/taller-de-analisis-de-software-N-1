@@ -1,13 +1,22 @@
 document.getElementById("loginForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  const datosLogin = {
-    correo: document.getElementById("correo").value,
-    password: document.getElementById("password").value,
-    tipoUsuario: document.getElementById("tipoUsuario").value
-  };
+  const correo = document.getElementById("correo").value;
+  const password = document.getElementById("password").value;
+  const tipoUsuario = document.getElementById("tipoUsuario").value;
 
-  // Aquí en la vida real deberías validar contra tu base de datos
-  alert("Login exitoso \n\n" + JSON.stringify(datosLogin, null, 2));
-  this.reset();
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+  const usuario = usuarios.find(
+    user => user.correo === correo && user.password === password && user.tipoUsuario === tipoUsuario
+  );
+
+  if (usuario) {
+    // Guardamos sesión activa
+    localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
+    alert("Bienvenido " + usuario.nombre);
+    window.location.href = "home.html";
+  } else {
+    alert("Credenciales incorrectas.");
+  }
 });

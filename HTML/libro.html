@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle del Libro</title>
+  <link rel="stylesheet" href="../CSS/libro.css">
+</head>
+<body>
+  <div class="detalle-container">
+    <button onclick="window.location.href='home.html'" class="btn-secondary">⬅ Volver al inicio</button>
+    
+    <div class="detalle-card">
+      <img id="libroImg" src="" alt="Imagen del libro" class="detalle-img">
+      <div class="detalle-info">
+        <h2 id="libroTitulo"></h2>
+        <p id="libroAutor" class="autor"></p>
+        <p id="libroDescripcion" class="descripcion"></p>
+        
+        <button id="btnDisponibilidad" class="btn-azul">Consultar disponibilidad</button>
+        <p id="libroStock" class="stock" style="display:none;"></p>
+        
+        <button id="btnReservar" class="btn-verde">Reservar libro</button>
+        <p id="mensajeReserva" class="mensaje" style="display:none;"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../JS/libro.js"></script>
+</body>
+</html>
