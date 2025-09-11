@@ -1,15 +1,17 @@
+// Verificar sesión activa
 const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
 if (!usuarioActivo) {
   window.location.href = "login.html";
 }
 
+// Logout
 document.getElementById("logoutBtn").addEventListener("click", () => {
   localStorage.removeItem("usuarioActivo");
   window.location.href = "login.html";
 });
 
-
-const libros = [
+// Lista inicial de libros (solo usada si no hay en localStorage)
+const librosIniciales = [
   { id: 1, titulo: "El Código Da Vinci", autor: "Dan Brown", descripcion: "Thriller histórico que mezcla arte, religión y misterio.", stock: 10, imagen: "https://covers.openlibrary.org/b/id/240727-L.jpg" },
   { id: 2, titulo: "Hábitos Atómicos", autor: "James Clear", descripcion: "Guía práctica para mejorar hábitos y alcanzar objetivos.", stock: 12, imagen: "https://covers.openlibrary.org/b/id/9251992-L.jpg" },
   { id: 3, titulo: "El Principito", autor: "Antoine de Saint-Exupéry", descripcion: "Fábula poética sobre la vida y la amistad.", stock: 3, imagen: "https://covers.openlibrary.org/b/id/13114639-L.jpg" },
@@ -41,7 +43,13 @@ const libros = [
   { id: 29, titulo: "El Retorno del Rey", autor: "J. R. R. Tolkien", descripcion: "Final épico de la trilogía de El Señor de los Anillos.", stock: 5, imagen: "https://covers.openlibrary.org/b/id/8231996-L.jpg" }
 ];
 
-localStorage.setItem("libros", JSON.stringify(libros));
+// Si no existen libros en localStorage, inicializarlos
+if (!localStorage.getItem("libros")) {
+  localStorage.setItem("libros", JSON.stringify(librosIniciales));
+}
+
+// Cargar siempre desde localStorage
+let libros = JSON.parse(localStorage.getItem("libros"));
 
 const catalogo = document.getElementById("catalogo");
 
@@ -72,9 +80,10 @@ function renderLibros(lista) {
   });
 }
 
-// Render inicial con todos los libros
+// Render inicial
 renderLibros(libros);
 
+// Buscador
 const searchBar = document.getElementById("searchBar");
 searchBar.addEventListener("input", () => {
   const texto = searchBar.value.toLowerCase();

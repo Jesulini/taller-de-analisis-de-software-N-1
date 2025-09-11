@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historial de Reservas</title>
+  <link rel="stylesheet" href="../CSS/historial.css">
+</head>
+<body>
+  <header>
+    <h1>📖 Historial de Reservas</h1>
+    <button onclick="window.location.href='home.html'" class="btn-secondary">⬅ Volver al inicio</button>
+  </header>
+
+  <main>
+    <table id="tablaReservas">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Autor</th>
+          <th>Usuario</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Las reservas se cargarán aquí con JS -->
+      </tbody>
+    </table>
+
+    <p id="sinReservas" class="mensaje">No tienes reservas registradas.</p>
+  </main>
+
+  <script src="../JS/historial.js"></script>
+</body>
+</html>

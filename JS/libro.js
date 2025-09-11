@@ -37,14 +37,27 @@ const mensajeReserva = document.getElementById("mensajeReserva");
 
 btnReservar.addEventListener("click", () => {
   if (libro.stock > 0) {
+    // Reducir stock
     libro.stock -= 1;
     localStorage.setItem("libros", JSON.stringify(libros));
 
+    // Guardar en historial de reservas
+    const reservas = JSON.parse(localStorage.getItem("reservas")) || [];
+    reservas.push({
+      id: libro.id,
+      titulo: libro.titulo,
+      autor: libro.autor,
+      usuario: usuarioActivo.correo, // o usuarioActivo.nombre según tu login
+      fecha: new Date().toLocaleString()
+    });
+    localStorage.setItem("reservas", JSON.stringify(reservas));
+
+    // Mostrar mensaje
     mensajeReserva.style.display = "block";
     mensajeReserva.textContent = `Has reservado "${libro.titulo}". Stock restante: ${libro.stock}`;
     libroStock.textContent = libro.stock > 0 
       ? `${libro.stock} unidades disponibles` 
-      : " Agotado";
+      : "Agotado";
   } else {
     mensajeReserva.style.display = "block";
     mensajeReserva.textContent = "Lo sentimos, este libro está agotado.";
