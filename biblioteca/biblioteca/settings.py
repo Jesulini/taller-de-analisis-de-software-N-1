@@ -11,8 +11,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
 SECRET_KEY = 'django-insecure-_y%kh2s7ge)9-)xd^4$nohayk^x-y@=wu)zgu6d!1xrend&qsq'
 
 DEBUG = True
@@ -23,15 +21,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # apps de Django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Tu app
+
+    # tus apps
+    'usuarios',
     'catalogo',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -89,22 +91,23 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Modelo de usuario personalizado
+AUTH_USER_MODEL = 'usuarios.Usuario'
+
 
 # Internationalization
-LANGUAGE_CODE = 'es'   # Cambiado a español
-
-TIME_ZONE = 'America/Bogota'  # Zona horaria de Colombia
-
+LANGUAGE_CODE = 'es'
+TIME_ZONE = 'America/Bogota'
 USE_I18N = True
-
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 
+# Carpetas donde Django buscará archivos estáticos
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # Aquí buscará Django
+    BASE_DIR / "static",  # Para archivos estáticos globales
 ]
 
 # Archivos subidos por los usuarios

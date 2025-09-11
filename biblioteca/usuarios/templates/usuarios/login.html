@@ -1,42 +1,31 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login de usuario</title>
-  <link rel="stylesheet" href="../CSS/login.css">
+  <title>Login</title>
+  <link rel="stylesheet" href="{% static 'usuarios/css/login.css' %}">
 </head>
 <body>
   <div class="form-container">
-    <h2>Login de usuario</h2>
-    <p class="subtitle">Ingresa tus credenciales.</p>
+    <h2>Login</h2>
 
-    <form id="loginForm">
-      <label for="correo">Correo electrónico</label>
-      <input type="email" id="correo" name="correo" required>
+    {% if messages %}
+      {% for message in messages %}
+        <div class="mensaje">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
 
-      <label for="password">Contraseña</label>
-      <input type="password" id="password" name="password" required>
-
-      <label for="tipoUsuario">Tipo de usuario</label>
-      <select id="tipoUsuario" name="tipoUsuario" required>
-        <option value="">-- Selecciona un tipo --</option>
-        <option value="estudiante">Estudiante</option>
-        <option value="docente">Docente</option>
-        <option value="administrador">Administrador</option>
-      </select>
-
-      <div class="buttons">
-        <button type="submit" class="btn-primary">Ingresar</button>
-        <button type="reset" class="btn-secondary">Limpiar</button>
-      </div>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn-primary">Ingresar</button>
     </form>
 
     <p class="link">
-      ¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a>
+      ¿No tienes cuenta? <a href="{% url 'usuarios:registro' %}">Regístrate aquí</a>
     </p>
   </div>
-
-  <script src="../JS/login.js"></script>
 </body>
 </html>
