@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-app_name = "usuarios"
+app_name = "usuarios"  # <--- Namespace para usuarios
 
 urlpatterns = [
     path("registro/", views.registro, name="registro"),

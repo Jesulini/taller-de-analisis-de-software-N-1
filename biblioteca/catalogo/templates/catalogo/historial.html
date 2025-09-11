@@ -1,35 +1,45 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Historial de Reservas</title>
-  <link rel="stylesheet" href="../CSS/historial.css">
+  <link rel="stylesheet" href="{% static 'catalogo/css/historial.css' %}">
 </head>
 <body>
   <header>
-    <h1>📖 Historial de Reservas</h1>
-    <button onclick="window.location.href='home.html'" class="btn-secondary">⬅ Volver al inicio</button>
+    <p>Bienvenido, {{ usuario.nombre_completo }} | 
+      <a href="{% url 'usuarios:logout' %}">Cerrar sesión</a>
+    </p>
+    <div class="botones-header">
+      <a href="{% url 'catalogo:home' %}" class="btn-secundario">⬅ Volver al inicio</a>
+    </div>
   </header>
 
   <main>
-    <table id="tablaReservas">
-      <thead>
-        <tr>
-          <th>Título</th>
-          <th>Autor</th>
-          <th>Usuario</th>
-          <th>Fecha</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Las reservas se cargarán aquí con JS -->
-      </tbody>
-    </table>
-
-    <p id="sinReservas" class="mensaje">No tienes reservas registradas.</p>
+    {% if reservas %}
+      <table>
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for reserva in reservas %}
+            <tr>
+              <td>{{ reserva.libro.titulo }}</td>
+              <td>{{ reserva.libro.autor }}</td>
+              <td>{{ reserva.fecha }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="mensaje">No tienes reservas registradas.</p>
+    {% endif %}
   </main>
-
-  <script src="../JS/historial.js"></script>
 </body>
 </html>

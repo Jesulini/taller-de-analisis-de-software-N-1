@@ -46,7 +46,6 @@ class LoginForm(forms.Form):
                 raise forms.ValidationError("Correo, contraseña o tipo de usuario incorrectos.")
 
             self.user = authenticate(username=email, password=password)
-
             if self.user is None:
                 raise forms.ValidationError("Correo, contraseña o tipo de usuario incorrectos.")
         return cleaned_data

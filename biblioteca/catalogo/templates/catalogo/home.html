@@ -4,23 +4,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo de Libros</title>
+  <title>Biblioteca - Home</title>
   <link rel="stylesheet" href="{% static 'catalogo/css/home.css' %}">
 </head>
 <body>
   <header>
-    <h1>📚 Catálogo de Libros</h1>
-    <p>Bienvenido, {{ usuario.nombre_completo }} | <a href="{% url 'usuarios:logout' %}">Cerrar sesión</a></p>
-    <form method="GET" action="">
-      <input type="text" name="q" placeholder="Buscar libro o autor..." value="{{ request.GET.q }}">
-      <button type="submit">🔍 Buscar</button>
-    </form>
+    <p>Bienvenido, {{ usuario.nombre_completo }} | 
+      <a href="{% url 'usuarios:logout' %}">Cerrar sesión</a>
+    </p>
+    <div class="botones-header">
+      <a href="{% url 'catalogo:historial' %}" class="btn-historial">📜 Historial</a>
+    </div>
   </header>
 
   <main class="libros-container">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="mensaje">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
     {% for libro in libros %}
       <div class="libro-card">
-        <img src="{{ libro.imagen.url }}" alt="{{ libro.titulo }}">
+        <img src="{{ libro.imagen }}" alt="{{ libro.titulo }}" class="libro-img">
         <h2>{{ libro.titulo }}</h2>
         <p>{{ libro.autor }}</p>
         <a href="{% url 'catalogo:detalle_libro' libro.id %}" class="btn-verde">Ver detalle</a>

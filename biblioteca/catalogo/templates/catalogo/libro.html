@@ -10,18 +10,37 @@
 <body>
   <header>
     <p>Bienvenido, {{ usuario.nombre_completo }} | <a href="{% url 'usuarios:logout' %}">Cerrar sesión</a></p>
-    <button onclick="window.location.href='{% url 'home' %}'" class="btn-secondary">⬅ Volver al inicio</button>
+    <div class="header-buttons">
+      <a href="{% url 'catalogo:home' %}" class="btn-secondary">⬅ Volver al inicio</a>
+      <a href="{% url 'catalogo:historial' %}" class="btn-secondary">📖 Historial</a>
+    </div>
   </header>
 
   <div class="detalle-container">
+    {% if messages %}
+      <div class="mensajes">
+        {% for message in messages %}
+          <div class="mensaje {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
     <div class="detalle-card">
-      <img src="{{ libro.imagen.url }}" alt="{{ libro.titulo }}" class="detalle-img">
+      <img src="{{ libro.imagen }}" alt="{{ libro.titulo }}" class="detalle-img">
       <div class="detalle-info">
         <h2>{{ libro.titulo }}</h2>
         <p class="autor">{{ libro.autor }}</p>
         <p class="descripcion">{{ libro.descripcion }}</p>
-        <p class="stock">{{ libro.stock }} unidades disponibles</p>
-        <p class="mensaje">Aquí puedes agregar tu lógica de reservas con Django</p>
+        <p class="stock">Stock disponible: {{ libro.stock }}</p>
+
+        {% if libro.stock > 0 %}
+        <form method="POST">
+          {% csrf_token %}
+          <button type="submit" class="btn-primary">📚 Reservar</button>
+        </form>
+        {% else %}
+        <button class="btn-disabled" disabled>Agotado</button>
+        {% endif %}
       </div>
     </div>
   </div>
